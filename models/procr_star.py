@@ -59,7 +59,7 @@ def get_distances(train_vectors, test_vectors, train_until):
 
     
 if __name__ == '__main__':
-    TEST_ON=13
+    TEST_ON=12
     train_vectors, test_vectors = get_data()
         
     results = get_distances(train_vectors, test_vectors, TEST_ON) 

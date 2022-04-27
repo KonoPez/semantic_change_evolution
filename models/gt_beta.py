@@ -16,9 +16,9 @@ Many thanks to Philippa Shoemark for her clarifications!
 
 def get_data():    
     data_folder = '../data/'    
-    ts = pickle.load(open(data_folder+'vectors.p', 'rb'))
-    train_idx = pickle.load(open(data_folder+'train_idx.p', 'rb'))
-    test_idx = pickle.load(open(data_folder+'test_idx.p', 'rb'))
+    ts = np.asarray(pickle.load(open(data_folder+'vectors.p', 'rb')))
+    train_idx = np.asarray(pickle.load(open(data_folder+'train_idx.p', 'rb')))
+    test_idx = np.asarray(pickle.load(open(data_folder+'test_idx.p', 'rb')))
     trainX, testX = ts[train_idx], ts[test_idx]
     return trainX, testX
 
@@ -87,7 +87,7 @@ def convert_dist_dict(dist_dict):
 
     
 if __name__ == '__main__':
-    TEST_ON = 14    
+    TEST_ON = 12    
     train_vectors, test_vectors = get_data()
         
     #calculate distances

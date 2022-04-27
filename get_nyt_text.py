@@ -7,7 +7,7 @@ key = "nR3tUPKNqlHSRnloD4GsUDADDLQiqSpb"
 suffix = ".json?api-key=" + key
 
 
-for year in range(2010,2015):
+for year in range(2010,2021):
     sents = []
     for month in range(1,13):
         query = f"/{year}/{month}"

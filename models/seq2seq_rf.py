@@ -9,14 +9,14 @@ random.seed(seed_value)
 import numpy as np
 np.random.seed(seed_value)
 import tensorflow as tf
-tf.set_random_seed(seed_value)
-from keras import backend as K
-session_conf = tf.ConfigProto(intra_op_parallelism_threads=1, inter_op_parallelism_threads=1)
-sess = tf.Session(graph=tf.get_default_graph(), config=session_conf)
+tf.random.set_seed(seed_value)
+from tensorflow.compat.v1.keras import backend as K
+session_conf = tf.compat.v1.ConfigProto(intra_op_parallelism_threads=1, inter_op_parallelism_threads=1)
+sess = tf.compat.v1.Session(graph=tf.compat.v1.get_default_graph(), config=session_conf)
 K.set_session(sess)
 
-from keras.models import Model
-from keras.layers import LSTM, TimeDistributed, Dense, Dropout, RepeatVector, Input
+from tensorflow.compat.v1.keras.models import Model
+from tensorflow.compat.v1.keras.layers import LSTM, TimeDistributed, Dense, Dropout, RepeatVector, Input
 from hyperopt import tpe, STATUS_OK, Trials
 from hyperas import optim
 from sklearn.metrics.pairwise import cosine_similarity
@@ -26,7 +26,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 def data():
-    TEST_ON=7
+    TEST_ON=12
     data_folder = '../data/'
 
     ts = pickle.load(open(data_folder+'vectors.p', 'rb'))
@@ -42,7 +42,7 @@ def data():
 
 
 def create_lstm_model(trainX, trainY, testX, testY):
-    TEST_ON=7
+    TEST_ON=12
 
     trainY_past = trainY[:, 0:TEST_ON, :]
     testY_past = testY[:, 0:TEST_ON, :]    
@@ -101,7 +101,7 @@ def create_lstm_model(trainX, trainY, testX, testY):
 
 
 if __name__ == '__main__':
-    TEST_ON=7
+    TEST_ON=12
     
     trials = Trials()
     best_run, best_model = optim.minimize(model=create_lstm_model,
